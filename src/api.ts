@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-const baseURL1 = 'https://my4qgjt3z4.execute-api.ap-southeast-2.amazonaws.com/prod/auth/skygo/token/v1/'
-// const baseURL2 = 'https://stupendous-scilla.glitch.me/api/'
-const instance = axios.create({ baseURL: baseURL1});
+// const baseURL1 = 'https://my4qgjt3z4.execute-api.ap-southeast-2.amazonaws.com/prod/auth/skygo/token/v1/'
+const baseURL2 = 'https://stupendous-scilla.glitch.me/'
+// const baseURL3 = 'https://981ht5pcch.execute-api.ap-southeast-2.amazonaws.com/prod/auth/skygo/token/v1'
+const instance = axios.create({ baseURL: baseURL2});
 instance.interceptors.request.use(config => {
   config.headers['Sky-X-Forwarded-for'] = 'test';
 
