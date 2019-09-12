@@ -1,6 +1,6 @@
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 
-const history = createHistory();
+const history = createBrowserHistory();
 
 history.listen((location, action) => {
   // Google Analytics
