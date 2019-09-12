@@ -6,13 +6,13 @@ import Auth from '../auth';
 
 const Login: React.FC<RouteComponentProps> = ({ location }) => {
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
-  const [name, setName] = useState('');
-  const [pwd, setPwd] = useState('');
+  const [username, setName] = useState('');
+  const [password, setPwd] = useState('');
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const data = await api.auth.login({ name, pwd });
+    const data = await api.auth.login({ username,password });
     if ((data.code = 'ok')) {
       Auth.token = data.token;
       setRedirectToReferrer(true);
@@ -31,7 +31,7 @@ const Login: React.FC<RouteComponentProps> = ({ location }) => {
           <input
             name="username"
             type="text"
-            value={name}
+            value={username}
             onChange={e => setName(e.target.value)}
           />
         </div>
@@ -41,7 +41,7 @@ const Login: React.FC<RouteComponentProps> = ({ location }) => {
           <input
             name="password"
             type="password"
-            value={pwd}
+            value={password}
             onChange={e => setPwd(e.target.value)}
           />
         </div>
