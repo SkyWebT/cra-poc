@@ -6,15 +6,15 @@ import Auth from '../auth';
 
 const Login: React.FC<RouteComponentProps> = ({ location }) => {
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
-  const [username, setName] = useState('');
-  const [password, setPwd] = useState('');
+  const [username, setName] = useState('dan_sit@skytv.co.nz');
+  const [password, setPwd] = useState('test@123');
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const data = await api.auth.login({ username,password });
-    if ((data.code = 'ok')) {
-      Auth.token = data.token;
+    if ((data.status = '200')) {
+      Auth.token = data.sessiontoken;
       setRedirectToReferrer(true);
     }
   };
