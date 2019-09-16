@@ -29,3 +29,12 @@ export interface T_Device {
   dateRegistered: Date;
   enabled: boolean;
 }
+export interface T_Occurrence {
+  accountNumber: string;
+  serialNumber: string;
+  occurrenceNumber: string;
+  nickName: string;
+  occurrenceType: string;
+  portType: string;
+  itemNumber: string;
+}

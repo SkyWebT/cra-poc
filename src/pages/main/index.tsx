@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Heading } from 'rebass';
 
 import Devices from './Devices';
+import Subscriptions from './Occurrences';
 import Profile from './Profile';
 
 const Index = () => {
@@ -11,6 +12,7 @@ const Index = () => {
       <Heading as="h1">my account</Heading>
       <Profile />
       <Devices />
+      <Subscriptions />
       <Link to="/logout">Logout </Link>
     </div>
   );

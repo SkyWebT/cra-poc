@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import Auth from './auth';
 import history from './history';
-import { T_AUTH_RESP, T_Device, T_Profile } from './types';
+import { T_AUTH_RESP, T_Device, T_Occurrence, T_Profile } from './types';
 
 const proxy = 'https://thankful-newt.glitch.me/';
 
@@ -56,6 +56,22 @@ const user = {
       `/devices/v1?product=skygo`
     );
     return data.data;
+  },
+  occurrences: async () => {
+    const { data } = await instance.get<{ occurrences: T_Occurrence[] }>(
+      `/occurrences/v1`
+    );
+    return data.occurrences;
+  },
+  subscription: async () => {
+    const { data } = await instance.get(
+      `/entitlements/v2/onlineSubscriptions?profileId=whatever`
+    );
+    return data;
+  },
+  entitlements: async () => {
+    const { data } = await instance.get(`/entitlements/v2`);
+    return data;
   },
 };
 
