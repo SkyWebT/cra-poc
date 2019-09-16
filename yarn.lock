@@ -8843,6 +8843,11 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
   integrity sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
 
+react-jeff@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-jeff/-/react-jeff-1.2.1.tgz#23e7be79b26bee2c12d5ad93f7d5e5c1e5d9b714"
+  integrity sha512-XmjPofFSYIgaGLNGgroOQ8AbNAAqiC/ALzPWPgnR+8fDi1Hz1yOszwGczvI0WidYecEYSFmC0GehFXgm1zgS5g==
+
 react-router-dom@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-5.0.1.tgz#ee66f4a5d18b6089c361958e443489d6bab714be"

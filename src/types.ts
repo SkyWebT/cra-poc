@@ -7,7 +7,7 @@ export interface T_AUTH_RESP {
 export interface T_Profile {
   firstName: string;
   lastName: string;
-  displayName: null;
+  displayName: string;
   profileId: string;
   email: string;
   status: string;

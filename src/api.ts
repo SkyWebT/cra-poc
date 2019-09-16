@@ -45,11 +45,17 @@ const auth = {
   },
 };
 const user = {
-  profile: async (profileId: string) => {
-    const { data } = await instance.get<T_Profile>(
-      `/users/v1/${profileId}?appName=awsTest`
-    );
-    return data;
+  profile: {
+    get: async (profileId: string) => {
+      const { data } = await instance.get<T_Profile>(
+        `/users/v1/${profileId}?appName=awsTest`
+      );
+      return data;
+    },
+    update: async (payload: any) => {
+      const { data } = await instance.put<T_Profile>(`/users/v1`, payload);
+      return data;
+    },
   },
   devices: async () => {
     const { data } = await instance.get<{ data: T_Device[] }>(
