@@ -5,6 +5,7 @@ import theme from '@rebass/preset';
 
 import App from './App';
 
+console.log(theme)
 const Root = () => {
   return (
     <ThemeProvider theme={theme}>

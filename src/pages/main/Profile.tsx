@@ -39,10 +39,10 @@ const ProfileForm: React.FC<{
       firstName: firstName.value,
       lastName: lastName.value,
       displayName: displayName.value,
-      receiveMarketingEmail: receiveMarketingEmail.value ,
-      blockAdultContent: blockAdultContent.value ,
+      receiveMarketingEmail: receiveMarketingEmail.value,
+      blockAdultContent: blockAdultContent.value,
     };
-   form.valid && onSubmit(payload);
+    form.valid && onSubmit(payload);
   };
 
   // Create your form...
@@ -62,18 +62,22 @@ const ProfileForm: React.FC<{
       <Flex mx={-2} mb={3}>
         <Box width={1 / 3} px={2}>
           <Control field={firstName}>
-          <JInput label="First name" id="firstName" {...firstName.props} />
+            <JInput label="First name" id="firstName" {...firstName.props} />
           </Control>
         </Box>
         <Box width={1 / 3} px={2}>
-          <JInput label="Last name" id="lastName" {...lastName.props} />
+          <Control field={lastName}>
+            <JInput label="Last name" id="lastName" {...lastName.props} />
+          </Control>
         </Box>
         <Box width={1 / 3} px={2}>
-          <JInput
-            label="Display name"
-            id="displayName"
-            {...displayName.props}
-          />
+          <Control field={displayName}>
+            <JInput
+              label="Display name"
+              id="displayName"
+              {...displayName.props}
+            />
+          </Control>
         </Box>
       </Flex>
       <Flex mx={-2} mb={3}>
@@ -94,7 +98,7 @@ const ProfileForm: React.FC<{
       </Flex>
       <Flex>
         <Box>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={!form.valid} >Submit</Button>
         </Box>
       </Flex>
     </JForm>
