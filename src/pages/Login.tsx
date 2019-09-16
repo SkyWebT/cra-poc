@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
+import { Button, Heading } from 'rebass';
+
+import { Input, Label } from '@rebass/forms';
 
 import api from '../api';
 import Auth from '../auth';
@@ -25,29 +28,33 @@ const Login: React.FC<RouteComponentProps> = ({ location }) => {
 
   return (
     <div>
-      Login
+      <Heading>Login</Heading>
       <form onSubmit={submit}>
         <div>
-          <label>username</label>
-          <input
+          <Label>username</Label>
+          <Input
             name="username"
             type="text"
             value={username}
-            onChange={e => setName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setName(e.target.value)
+            }
           />
         </div>
 
         <div>
-          <label>password </label>
-          <input
+          <Label>password </Label>
+          <Input
             name="password"
             type="password"
             value={password}
-            onChange={e => setPwd(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setPwd(e.target.value)
+            }
           />
         </div>
         <div>
-          <button type="submit">login</button>
+          <Button type="submit">login</Button>
         </div>
       </form>
     </div>

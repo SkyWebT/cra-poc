@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Heading } from 'rebass';
 
-import api from '../api';
-import Auth from '../auth';
-import { T_Profile } from '../types';
+import api from '../../api';
+import Auth from '../../auth';
+import { T_Profile } from '../../types';
 
-const Content = () => {
+const Profile = () => {
   const [data, setData] = useState(undefined as T_Profile | undefined);
   useEffect(() => {
     let current = true;
@@ -24,13 +24,12 @@ const Content = () => {
 
   return (
     <div>
-      <div>my account</div>
+      <Heading as="h2">my profile</Heading>
       <pre>
         {JSON.stringify(data,null,2)}
       </pre>
-      <Link to="/logout">Logout </Link>
     </div>
   );
 };
 
-export default Content;
+export default Profile;

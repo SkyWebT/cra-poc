@@ -20,3 +20,12 @@ export interface T_Profile {
   associated: boolean;
   type: string;
 }
+
+export interface T_Device {
+  product: string;
+  deviceId: string;
+  profileId: string;
+  alias: string;
+  dateRegistered: Date;
+  enabled: boolean;
+}
