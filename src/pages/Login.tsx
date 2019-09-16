@@ -12,9 +12,10 @@ const Login: React.FC<RouteComponentProps> = ({ location }) => {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const data = await api.auth.login({ username,password });
+    const data = await api.auth.login({ username, password });
     if ((data.status = '200')) {
       Auth.token = data.sessiontoken;
+      Auth.profileId = data.profileId;
       setRedirectToReferrer(true);
     }
   };
