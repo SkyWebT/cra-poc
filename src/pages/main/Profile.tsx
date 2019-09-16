@@ -4,7 +4,9 @@ import { Box, Button, Flex, Heading } from 'rebass';
 
 import api from '../../api';
 import Auth from '../../auth';
-import { JCheckBox, JForm, JInput, validateUsername } from '../../forms';
+import {
+    Control, JCheckBox, JForm, JInput, validateUsername
+} from '../../forms';
 import { T_Profile } from '../../types';
 
 const ProfileForm: React.FC<{
@@ -25,22 +27,22 @@ const ProfileForm: React.FC<{
     defaultValue: profile.displayName || '',
     validations: [validateUsername],
   });
-  let receiveMarketingEmail = useField({
-    defaultValue: profile.receiveMarketingEmail.toString(),
+  let receiveMarketingEmail = useField<boolean>({
+    defaultValue: profile.receiveMarketingEmail,
   });
 
-  let blockAdultContent = useField({
-    defaultValue: profile.blockAdultContent.toString(),
+  let blockAdultContent = useField<boolean>({
+    defaultValue: profile.blockAdultContent,
   });
   const onSubmit_ = () => {
     const payload = {
       firstName: firstName.value,
       lastName: lastName.value,
       displayName: displayName.value,
-      receiveMarketingEmail: receiveMarketingEmail.value === 'true',
-      blockAdultContent: blockAdultContent.value === 'true',
+      receiveMarketingEmail: receiveMarketingEmail.value ,
+      blockAdultContent: blockAdultContent.value ,
     };
-    onSubmit(payload);
+   form.valid && onSubmit(payload);
   };
 
   // Create your form...
@@ -59,7 +61,9 @@ const ProfileForm: React.FC<{
     <JForm {...form.props}>
       <Flex mx={-2} mb={3}>
         <Box width={1 / 3} px={2}>
+          <Control field={firstName}>
           <JInput label="First name" id="firstName" {...firstName.props} />
+          </Control>
         </Box>
         <Box width={1 / 3} px={2}>
           <JInput label="Last name" id="lastName" {...lastName.props} />

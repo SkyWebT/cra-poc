@@ -1,7 +1,10 @@
 import React from 'react';
-import { Box } from 'rebass';
+import { Field } from 'react-jeff';
+import { Box, Text } from 'rebass';
 
 import { Checkbox, Input, Label } from '@rebass/forms';
+
+type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
 
 export function validateUsername(value: string) {
   let errs = [];
@@ -28,6 +31,34 @@ export function validatePassword(value: string) {
   return errs;
 }
 
+export interface ControlProps<Val> {
+  children: React.ReactNode;
+  field: Field<Val>;
+}
+
+export function Control<Val>(props: ControlProps<Val>) {
+  return (
+    <Box>
+      {props.children}
+      {props.field.dirty && (
+        <>
+          {props.field.errors && (
+            <ul className="control-error">
+              {props.field.errors.map(err => {
+                return (
+                  <li key={err}>
+                    <Text color="red">{err}</Text>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </>
+      )}
+    </Box>
+  );
+}
+
 export const JForm = ({ onSubmit, ...props }: any) => {
   return (
     <Box
@@ -42,7 +73,13 @@ export const JForm = ({ onSubmit, ...props }: any) => {
   );
 };
 
-export const JInput = ({ id, label, onChange, ...props }: any) => {
+export const JInput = ({
+  id,
+  label,
+  onChange,
+  ...props
+}: Partial<Omit<React.HTMLProps<HTMLInputElement>, 'onChange' | 'value'>> &
+  PropType<Field<string>, 'props'>) => {
   return (
     <>
       <Label htmlFor={id}>{label}</Label>
@@ -50,22 +87,28 @@ export const JInput = ({ id, label, onChange, ...props }: any) => {
         id={id}
         {...props}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          onChange(event.currentTarget.value);
+          onChange && onChange(event.currentTarget.value);
         }}
       />
     </>
   );
 };
 
-export const JCheckBox = ({ id, label, onChange, ...props }: any) => {
+export const JCheckBox = ({
+  id,
+  label,
+  onChange,
+  ...props
+}: Partial<Omit<React.HTMLProps<HTMLInputElement>, 'onChange' | 'value'>> &
+  PropType<Field<boolean>, 'props'>) => {
   return (
     <Label htmlFor={id} p={2}>
       <Checkbox
         id={id}
         {...props}
-        checked={props.value === 'true'}
+        checked={props.value}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          onChange(event.currentTarget.checked ? 'true' : 'false');
+          onChange(event.currentTarget.checked);
         }}
       />
       {label}
