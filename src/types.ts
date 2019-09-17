@@ -28,6 +28,7 @@ export interface T_Device {
   alias: string;
   dateRegistered: Date;
   enabled: boolean;
+  description: string;
 }
 export interface T_Occurrence {
   accountNumber: string;
@@ -37,4 +38,8 @@ export interface T_Occurrence {
   occurrenceType: string;
   portType: string;
   itemNumber: string;
+  entitlements: {
+    code: string;
+    name: string;
+  }[];
 }

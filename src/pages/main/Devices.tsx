@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Heading } from 'rebass';
+import { Box, Heading, Text } from 'rebass';
 
 import api from '../../api';
 import { T_Device } from '../../types';
 
 const Devices = () => {
-  const [data, setData] = useState([] as T_Device []);
+  const [data, setData] = useState([] as T_Device[]);
   useEffect(() => {
     let current = true;
     const load = async () => {
@@ -24,9 +24,24 @@ const Devices = () => {
   return (
     <div>
       <Heading as="h2">my devices</Heading>
-      <pre>
-        {JSON.stringify(data,null,2)}
-      </pre>
+      {data.map(device => (
+        <Box
+          key={device.deviceId}
+          sx={{
+            display: 'inline-block',
+            color: 'white',
+            bg: 'primary',
+            m:2,
+            p:2,
+            borderRadius: 5,
+          }}
+        >
+          <Text>
+            {device.description} / {device.alias}
+          </Text>
+          <pre>{JSON.stringify(device, null, 2)}</pre>
+        </Box>
+      ))}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Heading } from 'rebass';
+import { Box, Heading, Text } from 'rebass';
 
 import api from '../../api';
 import { T_Occurrence } from '../../types';
@@ -24,7 +24,30 @@ const Occurrences = () => {
   return (
     <div>
       <Heading as="h2">my Occurrences</Heading>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      {data.map(occ => (
+        <Box
+          key={occ.itemNumber}
+          sx={{
+            display: 'inline-block',
+            color: 'white',
+            bg: 'primary',
+            m: 2,
+            p: 2,
+            borderRadius: 5,
+          }}
+        >
+          <Text>{occ.nickName} / {occ.occurrenceType} / {occ.portType}</Text>
+          <Text>Entitlements:</Text>
+          {occ.entitlements.map(ent => (
+            <Box
+              key={ent.code}
+              sx={{ display: 'inline-block', bg: 'palevioletred', m: 1, p: 1 ,borderRadius: 5,}}
+            >
+              {ent.name}
+            </Box>
+          ))}
+        </Box>
+      ))}
     </div>
   );
 };
