@@ -5,6 +5,7 @@ import { Box, Button, Flex, Heading, Text } from 'rebass';
 import api from '../../api';
 import Auth from '../../auth';
 import { Control, JForm, JInput, validateUsername } from '../../forms';
+import { BorderBox } from '../../primitives';
 import { T_Device } from '../../types';
 
 const Device: React.FC<{ device: T_Device }> = ({ device }) => {
@@ -19,7 +20,7 @@ const Device: React.FC<{ device: T_Device }> = ({ device }) => {
     };
     if (form.valid) {
       console.log('sumit');
-      await api.user.devices.update(Auth.profileId,device.deviceId, payload);
+      await api.user.devices.update(Auth.profileId, device.deviceId, payload);
       window.location.reload();
     }
   };
@@ -29,13 +30,10 @@ const Device: React.FC<{ device: T_Device }> = ({ device }) => {
     onSubmit: onSubmit_,
   });
   return (
-    <Box
+    <BorderBox
       key={device.deviceId}
       sx={{
         display: 'inline-block',
-        borderColor: 'primary',
-        borderWidth: 2,
-        borderStyle: 'solid',
         m: 2,
         p: 2,
         borderRadius: 5,
@@ -63,7 +61,7 @@ const Device: React.FC<{ device: T_Device }> = ({ device }) => {
       </JForm>
 
       <pre>{JSON.stringify(device, null, 2)}</pre>
-    </Box>
+    </BorderBox>
   );
 };
 
@@ -85,12 +83,12 @@ const Devices = () => {
   if (!data) return null;
 
   return (
-    <div>
+    <BorderBox>
       <Heading as="h2">my devices</Heading>
       {data.map(device => (
         <Device key={device.deviceId} device={device} />
       ))}
-    </div>
+    </BorderBox>
   );
 };
 

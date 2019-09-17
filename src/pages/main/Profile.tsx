@@ -7,6 +7,7 @@ import Auth from '../../auth';
 import {
     Control, JCheckBox, JForm, JInput, validateUsername
 } from '../../forms';
+import { BorderBox } from '../../primitives';
 import { T_Profile } from '../../types';
 
 const ProfileForm: React.FC<{
@@ -124,7 +125,7 @@ const Profile = () => {
   const onSubmit = async (payload: any) => {
     await api.user.profile.update(payload);
     // FIXME
-    window.location.reload()
+    window.location.reload();
   };
 
   const resetParentalPin = async () => {
@@ -134,7 +135,7 @@ const Profile = () => {
   if (!data) return null;
 
   return (
-    <div>
+    <BorderBox>
       <Heading as="h2">my profile</Heading>
       <pre>{JSON.stringify(data, null, 2)}</pre>
       <ProfileForm profile={data} onSubmit={onSubmit} />
@@ -142,7 +143,7 @@ const Profile = () => {
       <Button onClick={resetParentalPin}>
         Reset Parental Pin ( not working)
       </Button>
-    </div>
+    </BorderBox>
   );
 };
 

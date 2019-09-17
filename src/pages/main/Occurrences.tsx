@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Heading, Text } from 'rebass';
 
 import api from '../../api';
+import { BorderBox } from '../../primitives';
 import { T_Occurrence } from '../../types';
 
 const Occurrences = () => {
@@ -22,7 +23,7 @@ const Occurrences = () => {
   if (!data) return null;
 
   return (
-    <div>
+    <BorderBox>
       <Heading as="h2">my Occurrences</Heading>
       {data.map(occ => (
         <Box
@@ -48,7 +49,7 @@ const Occurrences = () => {
           ))}
         </Box>
       ))}
-    </div>
+    </BorderBox>
   );
 };
 
