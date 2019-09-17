@@ -73,11 +73,20 @@ const user = {
       return data;
     },
   },
-  devices: async () => {
-    const { data } = await instance.get<{ data: T_Device[] }>(
-      `/devices/v1?product=skygo`
-    );
-    return data.data;
+  devices: {
+    get: async () => {
+      const { data } = await instance.get<{ data: T_Device[] }>(
+        `/devices/v1?product=skygo`
+      );
+      return data.data;
+    },
+    update: async (profileId: string, deviceId: string, payload: any) => {
+      const { data } = await instance.put(
+        `/devices/v1/${deviceId}?product=skygo&profileId=${profileId}`,
+        payload
+      );
+      return data;
+    },
   },
   occurrences: async () => {
     const { data } = await instance.get<{ occurrences: T_Occurrence[] }>(

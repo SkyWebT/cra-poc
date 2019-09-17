@@ -99,7 +99,7 @@ const ProfileForm: React.FC<{
       <Flex>
         <Box>
           <Button type="submit" disabled={!form.valid}>
-            Submit
+            Update profile
           </Button>
         </Box>
       </Flex>
@@ -108,19 +108,23 @@ const ProfileForm: React.FC<{
 };
 const Profile = () => {
   const [data, setData] = useState(undefined as T_Profile | undefined);
-  const load = async () => {
-    const data = await api.user.profile.get(Auth.profileId);
-    api.user.detail.get(Auth.profileId);
-    setData(data);
-  };
+
   useEffect(() => {
+    let current = true;
+    const load = async () => {
+      const data = await api.user.profile.get(Auth.profileId);
+      current && setData(data);
+    };
     load();
-    return () => {};
+    return () => {
+      current = false;
+    };
   }, []);
 
   const onSubmit = async (payload: any) => {
     await api.user.profile.update(payload);
-    load();
+    // FIXME
+    window.location.reload()
   };
 
   const resetParentalPin = async () => {
@@ -135,7 +139,9 @@ const Profile = () => {
       <pre>{JSON.stringify(data, null, 2)}</pre>
       <ProfileForm profile={data} onSubmit={onSubmit} />
 
-      <Button onClick={resetParentalPin}>Reset Parental Pin ( not working)</Button>
+      <Button onClick={resetParentalPin}>
+        Reset Parental Pin ( not working)
+      </Button>
     </div>
   );
 };
