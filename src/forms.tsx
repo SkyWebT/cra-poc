@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'react-jeff';
 import { Box, Text } from 'rebass';
 
-import { Checkbox, Input, Label } from '@rebass/forms';
+import { Checkbox, Input, Label, Select } from '@rebass/forms';
 
 type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
 
@@ -90,6 +90,34 @@ export const JInput = ({
           onChange && onChange(event.currentTarget.value);
         }}
       />
+    </>
+  );
+};
+
+export const JSelect = ({
+  id,
+  label,
+  options,
+  onChange,
+  ...props
+}: Partial<Omit<React.HTMLProps<HTMLSelectElement>, 'onChange' | 'value'>> &
+  PropType<Field<string>, 'props'> & {
+    options: { value: string; text: string }[];
+  }) => {
+  return (
+    <>
+      <Label htmlFor={id}>{label}</Label>
+      <Select
+        id={id}
+        {...props}
+        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+          onChange && onChange(event.currentTarget.value);
+        }}
+      >
+        {options.map(option => (
+          <option value={option.value}>{option.text}</option>
+        ))}
+      </Select>
     </>
   );
 };

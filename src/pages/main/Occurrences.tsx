@@ -1,17 +1,28 @@
+import _uniq from 'lodash.uniqby';
 import React, { useEffect, useState } from 'react';
-import { Box, Heading, Text } from 'rebass';
+import { Box, Heading, Image, Text } from 'rebass';
 
 import api from '../../api';
 import { BorderBox } from '../../primitives';
-import { T_Occurrence } from '../../types';
+import { T_Marketing_Product, T_Occurrence, T_SKU } from '../../types';
 
 const Occurrences = () => {
   const [data, setData] = useState([] as T_Occurrence[]);
+  const [SKU, setSKU] = useState([] as T_SKU[]);
+  const [products, setProducts] = useState([] as T_Marketing_Product[]);
+
   useEffect(() => {
     let current = true;
     const load = async () => {
-      const data = await api.user.occurrences();
-      current && setData(data);
+      api.user.occurrences.get().then(data => {
+        current && setData(_uniq(data, 'serialNumber'));
+      });
+      api.cart.admin.translator().then(data => {
+        current && setSKU(data);
+      });
+      api.cart.admin.marketingProducts().then(data => {
+        current && setProducts(data);
+      });
     };
     load();
 
@@ -37,16 +48,36 @@ const Occurrences = () => {
             borderRadius: 5,
           }}
         >
-          <Text>{occ.nickName} / {occ.occurrenceType} / {occ.portType}</Text>
+          <Text>
+            {occ.nickName} / {occ.occurrenceType} / {occ.portType}
+          </Text>
           <Text>Entitlements:</Text>
-          {occ.entitlements.map(ent => (
-            <Box
-              key={ent.code}
-              sx={{ display: 'inline-block', bg: 'palevioletred', m: 1, p: 1 ,borderRadius: 5,}}
-            >
-              {ent.name}
-            </Box>
-          ))}
+          {occ.entitlements.map(ent => {
+            const sku = SKU.find(sku => sku.inboundIcomsCodes[0] === ent.code);
+            const product = sku && products.find(p => p.sku === sku.sku);
+            return (
+              <Box
+                key={ent.code}
+                sx={{
+                  display: 'inline-block',
+                  bg: 'palevioletred',
+                  m: 1,
+                  p: 1,
+                  borderRadius: 5,
+                }}
+              >
+                {ent.name}
+                <Box bg="white">
+                  {product && (
+                    <Image
+                      sx={{ height: 40 }}
+                      src={`https://sky.co.nz/${product.imageUrl}`}
+                    />
+                  )}
+                </Box>
+              </Box>
+            );
+          })}
         </Box>
       ))}
     </BorderBox>
