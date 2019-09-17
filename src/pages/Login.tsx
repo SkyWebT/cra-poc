@@ -9,8 +9,8 @@ import Auth from '../auth';
 
 const Login: React.FC<RouteComponentProps> = ({ location }) => {
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
-  const [username, setName] = useState('dan_sit@skytv.co.nz');
-  const [password, setPwd] = useState('test@123');
+  const [username, setName] = useState('arvtester@mailinator.com');
+  const [password, setPwd] = useState('tester1');
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();

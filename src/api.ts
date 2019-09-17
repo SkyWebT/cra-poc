@@ -45,6 +45,22 @@ const auth = {
   },
 };
 const user = {
+  parentalPin: {
+    reset: async (profileId: string) => {
+      const { data } = await instance.put(
+        `/users/v1/${profileId}/emailResetParentalPin?appName=skygo`
+      );
+      return data;
+    },
+  },
+  detail: {
+    get: async (profileId: string) => {
+      const { data } = await instance.get<T_Profile>(
+        `/frontend-service/v1/user/${profileId}?fields=onlineSubscriptions,entitlements,occurrences`
+      );
+      return data;
+    },
+  },
   profile: {
     get: async (profileId: string) => {
       const { data } = await instance.get<T_Profile>(
