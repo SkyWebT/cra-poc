@@ -23,10 +23,14 @@ export const Device: React.FC<{
       DeviceStore.update(device.deviceId, payload);
     }
   };
-  let form = useForm({
+  const form = useForm({
     fields: [alias],
     onSubmit: onSubmit_,
   });
+
+  const deleteDevice = () => {
+    DeviceStore.delete(device.deviceId);
+  };
   return (
     <BorderBox
       key={device.deviceId}
@@ -54,6 +58,9 @@ export const Device: React.FC<{
             <Button type="submit" disabled={!form.valid}>
               Update device
             </Button>
+          </Box>
+          <Box width={1 / 2} px={2}>
+            <Button onClick={deleteDevice}>Delete device </Button>
           </Box>
         </Flex>
       </JForm>

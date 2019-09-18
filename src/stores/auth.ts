@@ -1,4 +1,4 @@
-import { action, autorun, computed, observable } from 'mobx';
+import { action, autorun, computed, observable, runInAction } from 'mobx';
 
 class AuthStore {
   constructor() {
@@ -24,10 +24,14 @@ class AuthStore {
   };
 
   set token(token: string) {
-    this.values.token = token;
+    runInAction(() => {
+      this.values.token = token;
+    });
   }
   set profileId(profileId: string) {
-    this.values.profileId = profileId;
+    runInAction(() => {
+      this.values.profileId = profileId;
+    });
   }
   get token() {
     return this.values.token;

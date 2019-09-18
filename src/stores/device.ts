@@ -23,7 +23,19 @@ class DeviceStore {
       });
     });
   }
+
+  async delete(deviceId: string) {
+    await api.user.devices.delete(Auth.profileId, deviceId);
+    runInAction(() => {
+      const index = this.devices.findIndex(
+        device => device.deviceId === deviceId
+      );
+      if (index > -1) {
+        this.devices.splice(index, 1);
+      }
+    });
+  }
 }
 
 const deviceStore = new DeviceStore();
-export default deviceStore
+export default deviceStore;

@@ -71,6 +71,12 @@ const devices = {
     );
     return data;
   },
+  delete: async (profileId: string, deviceId: string) => {
+    const { data } = await instance.delete(
+      `/devices/v1/${deviceId}?product=skygo&profileId=${profileId}&forceDelete=false`,
+    );
+    return data;
+  },
 };
 const occurrences = {
   get: async () => {

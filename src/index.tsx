@@ -1,10 +1,13 @@
 import './index.css';
 
+import { configure } from 'mobx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Root from './Root';
 import * as serviceWorker from './serviceWorker';
+
+configure({enforceActions: true})
 
 ReactDOM.render(<Root />, document.getElementById('root'));
 
