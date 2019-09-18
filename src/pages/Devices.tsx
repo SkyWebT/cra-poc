@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useField, useForm } from 'react-jeff';
 import { Box, Button, Flex, Heading, Text } from 'rebass';
 
-import api from '../../api';
-import Auth from '../../auth';
-import { Control, JForm, JInput, validateUsername } from '../../forms';
-import { BorderBox } from '../../primitives';
-import { T_Device } from '../../types';
+import api from '../api';
+import { Control, JForm, JInput, validateUsername } from '../forms';
+import { BorderBox } from '../primitives';
+import Auth from '../stores/auth';
+import { T_Device } from '../types';
 
 const Device: React.FC<{ device: T_Device }> = ({ device }) => {
   let alias = useField({
@@ -19,7 +19,6 @@ const Device: React.FC<{ device: T_Device }> = ({ device }) => {
       alias: alias.value,
     };
     if (form.valid) {
-      console.log('sumit');
       await api.user.devices.update(Auth.profileId, device.deviceId, payload);
       window.location.reload();
     }

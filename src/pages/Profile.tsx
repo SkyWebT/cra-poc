@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useField, useForm } from 'react-jeff';
 import { Box, Button, Flex, Heading } from 'rebass';
 
-import api from '../../api';
-import Auth from '../../auth';
+import api from '../api';
 import {
     Control, JCheckBox, JForm, JInput, JSelect, validateUsername
-} from '../../forms';
-import { BorderBox } from '../../primitives';
-import { T_Profile } from '../../types';
+} from '../forms';
+import { BorderBox } from '../primitives';
+import Auth from '../stores/auth';
+import { T_Profile } from '../types';
 
 const AdultContentMapping = [
   { level: '2', rating: 'G', description: 'General Showing' },

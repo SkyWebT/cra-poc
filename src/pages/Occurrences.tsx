@@ -2,9 +2,9 @@ import _uniq from 'lodash.uniqby';
 import React, { useEffect, useState } from 'react';
 import { Box, Heading, Image, Text } from 'rebass';
 
-import api from '../../api';
-import { BorderBox } from '../../primitives';
-import { T_Marketing_Product, T_Occurrence, T_SKU } from '../../types';
+import api from '../api';
+import { BorderBox } from '../primitives';
+import { T_Marketing_Product, T_Occurrence, T_SKU } from '../types';
 
 const Occurrences = () => {
   const [data, setData] = useState([] as T_Occurrence[]);
@@ -60,7 +60,7 @@ const Occurrences = () => {
                 key={ent.code}
                 sx={{
                   display: 'inline-block',
-                  bg: 'palevioletred',
+                  bg: 'secondary',
                   m: 1,
                   p: 1,
                   borderRadius: 5,

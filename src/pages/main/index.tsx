@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Heading } from 'rebass';
 
-import Devices from './Devices';
-import Subscriptions from './Occurrences';
-import Profile from './Profile';
+import Devices from '../Devices';
+import Subscriptions from '../Occurrences';
+import Profile from '../Profile';
 
 const Index = () => {
   return (

@@ -5,7 +5,7 @@ import { Button, Heading } from 'rebass';
 import { Input, Label } from '@rebass/forms';
 
 import api from '../api';
-import Auth from '../auth';
+import Auth from '../stores/auth';
 
 const Login: React.FC<RouteComponentProps> = ({ location }) => {
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);

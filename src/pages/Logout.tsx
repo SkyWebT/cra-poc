@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
-import Auth from '../auth';
 import history from '../history';
+import Auth from '../stores/auth';
 
 const Logout = ()=>{
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import Auth from '../auth';
 import history from '../history';
+import Auth from '../stores/auth';
 import { T_AUTH_RESP, T_Device, T_Occurrence, T_Profile } from '../types';
 
 const proxy = 'https://thankful-newt.glitch.me/';
