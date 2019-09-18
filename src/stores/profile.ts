@@ -4,7 +4,7 @@ import api from '../api';
 import { T_Profile } from '../types';
 import Auth from './auth';
 
-class Profile {
+class ProfileStore {
   @observable values?: T_Profile;
 
   async fetch() {
@@ -20,5 +20,5 @@ class Profile {
     });
   }
 }
-
-export default new Profile();
+const profileStore = new ProfileStore()
+export default profileStore;

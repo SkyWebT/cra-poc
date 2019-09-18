@@ -1,19 +1,22 @@
 import { action, autorun, computed, observable } from 'mobx';
 
-class Auth {
+class AuthStore {
   constructor() {
     // read
     for (let key in this.values) {
       this.values[key] = localStorage.getItem(key) || '';
     }
     // write
-    autorun(() => {
-      for (let key in this.values) {
-        localStorage.setItem(key, this.values[key]);
+    autorun(
+      () => {
+        for (let key in this.values) {
+          localStorage.setItem(key, this.values[key]);
+        }
+      },
+      {
+        delay: 100,
       }
-    },{
-      delay:100
-    });
+    );
   }
   @observable values: { [index: string]: string } = {
     token: '',
@@ -43,4 +46,6 @@ class Auth {
     };
   }
 }
-export default new Auth();
+
+const authStore = new AuthStore();
+export default authStore;

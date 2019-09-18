@@ -4,12 +4,12 @@ import { Flex, Heading } from 'rebass';
 
 import { Device } from '../comp/Device';
 import { BorderBox } from '../primitives';
-import DeviceStore from '../stores/device';
+import deviceStore from '../stores/device';
 
 const Devices: React.FC = () => {
-  const devices = DeviceStore.devices;
+  const devices = deviceStore.devices;
   useEffect(() => {
-    DeviceStore.fetch();
+    deviceStore.fetch();
   }, []);
 
   if (!devices.length) return <Flex justifyContent="center">loading...</Flex>;

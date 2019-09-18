@@ -3,12 +3,12 @@ import React, { useEffect } from 'react';
 import { Box, Flex, Heading, Image, Text } from 'rebass';
 
 import { BorderBox } from '../primitives';
-import OccurrenceStore from '../stores/occurence';
+import occurenceStore from '../stores/occurence';
 
 const Occurrences: React.FC = () => {
-  const occurences = OccurrenceStore.occurences;
+  const occurences = occurenceStore.occurences;
   useEffect(() => {
-    OccurrenceStore.fetch();
+    occurenceStore.fetch();
   }, []);
 
   if (!occurences.length)
@@ -34,7 +34,7 @@ const Occurrences: React.FC = () => {
           </Text>
           <Text>Entitlements:</Text>
           {occ.entitlements.map(ent => {
-            const img = OccurrenceStore.getImage(ent.code);
+            const img = occurenceStore.getImage(ent.code);
             return (
               <Box
                 key={ent.code}

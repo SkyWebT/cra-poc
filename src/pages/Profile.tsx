@@ -6,16 +6,16 @@ import api from '../api';
 import { ProfileForm } from '../comp/ProfileForm';
 import { BorderBox } from '../primitives';
 import Auth from '../stores/auth';
-import ProfileStore from '../stores/profile';
+import profileStore from '../stores/profile';
 
 const Profile: React.FC = () => {
-  const profile = ProfileStore.values;
+  const profile = profileStore.values;
   useEffect(() => {
-    ProfileStore.fetch();
+    profileStore.fetch();
   }, []);
 
   const onSubmit = async (payload: any) => {
-    ProfileStore.update(payload)
+    profileStore.update(payload)
   };
 
   const resetParentalPin = async () => {

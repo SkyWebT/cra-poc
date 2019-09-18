@@ -4,7 +4,7 @@ import api from '../api';
 import { T_Device } from '../types';
 import Auth from './auth';
 
-class Device {
+class DeviceStore {
   @observable devices: T_Device[] = [];
 
   async fetch() {
@@ -25,4 +25,5 @@ class Device {
   }
 }
 
-export default new Device();
+const deviceStore = new DeviceStore();
+export default deviceStore
