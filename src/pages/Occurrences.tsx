@@ -1,42 +1,23 @@
-import _uniq from 'lodash.uniqby';
-import React, { useEffect, useState } from 'react';
-import { Box, Heading, Image, Text } from 'rebass';
+import { observer } from 'mobx-react';
+import React, { useEffect } from 'react';
+import { Box, Flex, Heading, Image, Text } from 'rebass';
 
-import api from '../api';
 import { BorderBox } from '../primitives';
-import { T_Marketing_Product, T_Occurrence, T_SKU } from '../types';
+import OccurrenceStore from '../stores/occurence';
 
-const Occurrences = () => {
-  const [data, setData] = useState([] as T_Occurrence[]);
-  const [SKU, setSKU] = useState([] as T_SKU[]);
-  const [products, setProducts] = useState([] as T_Marketing_Product[]);
-
+const Occurrences: React.FC = () => {
+  const occurences = OccurrenceStore.occurences;
   useEffect(() => {
-    let current = true;
-    const load = async () => {
-      api.user.occurrences.get().then(data => {
-        current && setData(_uniq(data, 'serialNumber'));
-      });
-      api.cart.admin.translator().then(data => {
-        current && setSKU(data);
-      });
-      api.cart.admin.marketingProducts().then(data => {
-        current && setProducts(data);
-      });
-    };
-    load();
-
-    return () => {
-      current = false;
-    };
+    OccurrenceStore.fetch();
   }, []);
 
-  if (!data) return null;
+  if (!occurences.length)
+    return <Flex justifyContent="center">loading...</Flex>;
 
   return (
     <BorderBox>
       <Heading as="h2">my Occurrences</Heading>
-      {data.map(occ => (
+      {occurences.map(occ => (
         <Box
           key={occ.itemNumber}
           sx={{
@@ -53,8 +34,7 @@ const Occurrences = () => {
           </Text>
           <Text>Entitlements:</Text>
           {occ.entitlements.map(ent => {
-            const sku = SKU.find(sku => sku.inboundIcomsCodes[0] === ent.code);
-            const product = sku && products.find(p => p.sku === sku.sku);
+            const img = OccurrenceStore.getImage(ent.code);
             return (
               <Box
                 key={ent.code}
@@ -68,10 +48,10 @@ const Occurrences = () => {
               >
                 {ent.name}
                 <Box bg="white">
-                  {product && (
+                  {img && (
                     <Image
                       sx={{ height: 40 }}
-                      src={`https://sky.co.nz/${product.imageUrl}`}
+                      src={`https://sky.co.nz/${img}`}
                     />
                   )}
                 </Box>
@@ -84,4 +64,4 @@ const Occurrences = () => {
   );
 };
 
-export default Occurrences;
+export default observer(Occurrences);

@@ -1,6 +1,6 @@
 import { action, autorun, computed, observable } from 'mobx';
 
-class AuthC {
+class Auth {
   constructor() {
     // read
     for (let key in this.values) {
@@ -43,4 +43,4 @@ class AuthC {
     };
   }
 }
-export default new AuthC();
+export default new Auth();
